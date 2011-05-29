@@ -9,7 +9,7 @@ from tw2.protovis.core import pv
 class js(twc.JSSymbol):
     def __init__(self, src):
         super(js, self).__init__(src=src)
-        
+
 class NodeLinkTree(twp.PVWidget):
     p_orient = twc.Param('orientation parameter', default="radial")
     p_breadth = twc.Param(default=10)
@@ -33,3 +33,32 @@ class NodeLinkTree(twp.PVWidget):
 
         tree.label.add(pv.Label)
 
+class CirclePackingWidget(twp.PVWidget):
+
+    def prepare(self):
+        self.init_js = js(
+            """
+            var format = pv.Format.number();
+            var data = %s;
+            """ % self.p_data
+        )
+
+        self.setupRootPanel()
+
+        pack = self.add(pv.Layout.Pack)\
+                .nodes(js('pv.dom(data).root("flare").nodes()'))\
+                .size(js('function(d) d.nodeValue'))
+
+        pack.node.add(pv.Dot)\
+                .fillStyle(js(
+        'function(d) d.firstChild ? "rgba(31, 119, 180, .25)" : "#ff7f0e"'
+                ))\
+                .title(js(
+        'function(d) d.nodeName + (d.firstChild ? "" : ": " + format(d.nodeValue))'
+                ))\
+                .lineWidth(1)
+        pack.label.add(pv.Label)\
+                .visible(js('function(d) !d.firstChild'))\
+                .text(js(
+        'function(d) d.nodeName.substring(0, Math.sqrt(d.nodeValue) / 20)'
+                ))

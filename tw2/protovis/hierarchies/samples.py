@@ -6,7 +6,7 @@ widget here with some parameters filled out.
 The demos implemented here are what is displayed in the tw2.devtools
 WidgetBrowser.
 """
-from widgets import NodeLinkTree
+from widgets import NodeLinkTree, CirclePackingWidget
 
 from widgets import js
 from tw2.core import JSSymbol
@@ -41,4 +41,9 @@ class DemoNodeLinkTree(NodeLinkTree):
     def prepare(self):
         self.p_data = build_tree() # of tw2.core
         super(DemoNodeLinkTree, self).prepare()
+
+class DemoCirclePackingWidget(CirclePackingWidget):
+    p_height = 500
+    p_width = 500
+    p_data = build_tree() # Builds a tree of the filesizes of tw2.core
 
