@@ -37,13 +37,28 @@ class CirclePackingWidget(twp.PVWidget):
     root_title = twc.Param("Root title", default="root title")
 
 
+    def find_bounds(self, data, _min=1000000000000, _max=0):
+        for key, value in data.iteritems():
+            if isinstance(value, dict):
+                _min, _max = self.find_bounds(value, _min, _max)
+            else:
+                if value < _min:
+                    _min = value
+
+                if value > _max:
+                    _max = value
+        return _min, _max
+
     def prepare(self):
+        _min, _max = self.find_bounds(self.p_data)
         self.init_js = js(
             """
             var format = pv.Format.number();
             var data = %s;
             var title = "%s";
-            """ % (self.p_data, self.root_title)
+            var min = %f;
+            var max = %f;
+            """ % (self.p_data, self.root_title, _min, _max)
         )
 
         self.setupRootPanel()
@@ -63,5 +78,5 @@ class CirclePackingWidget(twp.PVWidget):
         pack.label.add(pv.Label)\
                 .visible(js('function(d) !d.firstChild'))\
                 .text(js(
-        'function(d) d.nodeName.substring(0, Math.sqrt(d.nodeValue) / 20)'
+        'function(d) d.nodeName.substring(0, 25*(d.nodeValue - min)/(max - min))'
                 ))
