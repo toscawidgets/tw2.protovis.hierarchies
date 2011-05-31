@@ -34,19 +34,22 @@ class NodeLinkTree(twp.PVWidget):
         tree.label.add(pv.Label)
 
 class CirclePackingWidget(twp.PVWidget):
+    root_title = twc.Param("Root title", default="root title")
+
 
     def prepare(self):
         self.init_js = js(
             """
             var format = pv.Format.number();
             var data = %s;
-            """ % self.p_data
+            var title = "%s";
+            """ % (self.p_data, self.root_title)
         )
 
         self.setupRootPanel()
 
         pack = self.add(pv.Layout.Pack)\
-                .nodes(js('pv.dom(data).root("flare").nodes()'))\
+                .nodes(js('pv.dom(data).root(title).nodes()'))\
                 .size(js('function(d) d.nodeValue'))
 
         pack.node.add(pv.Dot)\

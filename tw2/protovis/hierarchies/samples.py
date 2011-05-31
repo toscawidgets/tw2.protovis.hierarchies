@@ -45,5 +45,6 @@ class DemoNodeLinkTree(NodeLinkTree):
 class DemoCirclePackingWidget(CirclePackingWidget):
     p_height = 500
     p_width = 500
+    root_title = "filesizes in tw2.core"
     p_data = build_tree() # Builds a tree of the filesizes of tw2.core
 
