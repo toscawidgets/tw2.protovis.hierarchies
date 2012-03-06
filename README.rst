@@ -1,5 +1,5 @@
 tw2.protovis.hierarchies
-===================
+========================
 
 :Author: Ralph Bean <rbean@redhat.com>
 
@@ -18,9 +18,9 @@ Peep the `live demonstration <http://tw2-demos.threebean.org/module?module=tw2.p
 Links
 -----
 
-You can `get the source from github <http://github.com/ralphbean/tw2.protovis.hierarchies>`_,
+You can `get the source from github <http://github.com/toscawidgets/tw2.protovis.hierarchies>`_,
 check out `the PyPI page <http://pypi.python.org/pypi/tw2.protovis.hierarchies>`_, and
-report or look into `bugs <http://github.com/ralphbean/tw2.protovis.hierarchies/issues/>`_.
+report or look into `bugs <http://github.com/toscawidgets/tw2.protovis.hierarchies/issues/>`_.
 
 Description
 -----------
@@ -35,30 +35,21 @@ flexible, reliable, documented, performant, and as simple as possible.
 
 This module, tw2.protovis.hierarchies, provides `toscawidgets2 (tw2)`_ widgets that render `protovis`_ data visualizations.
 
-
 Sampling tw2.protovis.hierarchies in the WidgetBrowser
--------------------------------------
+------------------------------------------------------
 
-The best way to scope out ``tw2.protovis.hierarchies`` is to load its widgets in the 
+The best way to scope out ``tw2.protovis.hierarchies`` is to load its widgets in the
 ``tw2.devtools`` WidgetBrowser.  To see the source code that configures them,
-check out ``tw2.protovis.hierarchies/samples.py``
+check out ``tw2.protovis.hierarchies/tw2/protovis.hierarchies/samples.py``
 
-To give it a try you'll need git, mercurial, python, and virtualenv.  Run:
+To give it a try you'll need git, python, and `virtualenvwrapper
+<http://pypi.python.org/pypi/virtualenvwrapper>`_.  Run::
 
-    ``git clone git://github.com/ralphbean/tw2.protovis.hierarchies.git``
-
-    ``cd tw2.protovis.hierarchies``
-
-The following script will set up all the necessary tw2 dependencies in a
-python virtualenv:
-
-    ``./develop-tw2-destroy-and-setup.sh``
-
-The following will enter the virtualenv and start up ``paster tw2.browser``:
-
-    ``./develop-tw2-start.sh``
+    $ git clone git://github.com/toscawidgets/tw2.protovis.hierarchies.git
+    $ cd tw2.protovis.hierarchies
+    $ mkvirtualenv tw2.protovis.hierarchies
+    (tw2.protovis.hierarchies) $ pip install tw2.devtools
+    (tw2.protovis.hierarchies) $ python setup.py develop
+    (tw2.protovis.hierarchies) $ paster tw2.browser
 
 ...and browse to http://localhost:8000/ to check it out.
-
-
-
